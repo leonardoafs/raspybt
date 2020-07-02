@@ -27,4 +27,15 @@ Com isso, salve com o comando `:x`  e reinicie com `sudo reboot`.
 
 Agora, procure o bluetooth `rasperrypi` no seu celular. Após conectar, digite no terminal `sudo rfcomm watch hci0`.
 Com isso, abra o app Serial Bluetooth Terminal. Clique em `Devices` e selecione `raspberrypi`.
+Após, na Raspberry, com o comando `python -m serial.tools.list_ports`, verifique se lá está `/dev/rfcomm0`.
 
+```
+import serial
+ser = serial.Serial('/dev/rfcomm0')
+if serial.isOpen():
+    ser.write(b'\r\nSeja bem vindo! Pode escrever abaixo o comando:\r\n')
+    palavra = ser.readline()
+    print(palavra)
+else:
+    print("Deu Ruim")
+```
